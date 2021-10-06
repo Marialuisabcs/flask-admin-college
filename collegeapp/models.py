@@ -13,6 +13,9 @@ class Aluno(db.Model):
     curso_id = db.Column(db.Integer, db.ForeignKey('curso.id_curso', ondelete='CASCADE'))
     curso = db.relationship("Curso")
 
+    def __repr__(self):
+        return self.nome
+
 
 class Curso(db.Model):
     __tablename__ = 'curso'
@@ -22,6 +25,9 @@ class Curso(db.Model):
     coordenador_id = db.Column(db.Integer, db.ForeignKey('professor.id_professor', ondelete='CASCADE'))
     coordenador = db.relationship("Professor")
 
+    def __repr__(self):
+        return self.nome
+
 
 class Professor(db.Model):
     __tablename__ = 'professor'
@@ -30,12 +36,18 @@ class Professor(db.Model):
     email = db.Column(db.String(30), nullable=False, unique=True)
     cpf = db.Column(db.String(11), nullable=False, unique=True)
 
+    def __repr__(self):
+        return self.nome
+
 
 class Materia(db.Model):
     __tablename__ = 'materia'
     id_materia = db.Column(db.Integer, primary_key=True, autoincrement=True)
     nome = db.Column(db.String(255), nullable=True)
     carga_horaria = db.Column(db.Integer, nullable=False)
+
+    def __repr__(self):
+        return self.nome
 
 
 class MatriculadoEm(db.Model):
@@ -52,3 +64,4 @@ class LecionadaPor(db.Model):
     professor_id = db.Column(db.ForeignKey('professor.id_professor', ondelete='CASCADE'), primary_key=True)
     professor = db.relationship("Professor")
     materia = db.relationship("Materia")
+
