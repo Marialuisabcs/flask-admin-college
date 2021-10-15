@@ -1,25 +1,40 @@
 {% extends 'admin/master.html' %}
-
+{% block head %}
+<link rel="stylesheet" href="../../static/style.css" />
+{% endblock head %}
 {% block body %}
 
     <div class="row">
         <div class="col-md-6">
-            <h1>Bem-vindo</h1>
+            <h1>Bem-vindo!</h1>
             <h3>Como utilizar a ferramenta:</h3>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
+            <p class= "pff">
+                Para consultar os dados, basta selecionar no menu acima a tabela que deseja checar.
+                Ao escolher a tabela, você pode criar algum dado em <em>'create'</em>, ou <em>deletar</em>, ao clicar
+                no ícone de lixeira.
+                Para <em>editar</em> o dado armazenado, basta selecionar o ícone do lápis ao lado da lixeira.
+                Algumas ressalvas para a criação de registros:<br />
+                &#10047; Um curso não existe sem um coordenador que, por sua vez, é um professor;
+                <br />
+                &#10047; Um aluno precisa estar vinculado a um curso já existente;
+                <br />
+                &#10047; Um aluno só pode ser <strong>matriculado em </strong> uma matéria já registrada;
+                <br />
+                &#10047; Uma matéria só pode ser <strong>lecionada por </strong> um professor já cadastrado;
+                <br />
             </p>
         </div>
         <div class="col-md-6">
-            <h1>Tecnologias utilizadas</h1>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
+            <h1>Tecnologias utilizadas:</h1>
+            <p class = "pgf">
+                Framework -> Flask-admin : Microframework baseado em Python com o objetivo de criar páginas web.
+                (<strong>Versão: 2.0.1</strong>)  <br/>
+                ORM -> SQLAlchemy : Object-Relational Mapping (ORM) de código aberto desenvolvido para a linguagem
+                Python distribuído sobre a licença MIT.  (<strong>Versão: 1.4.23</strong>) <br/>
+                SGBD -> SQLite3 : Sistema Gerenciador de Banco de Dados (SGBD) que manipula os dados inseridos no
+                nosso sistema. (<strong>Versão: 3.36.0</strong>)  <br/>
+                Linguagem -> Python : Linguagem de programação de alto nível.
+                 <br/>(<strong>Versão: 3.9</strong>)
             </p>
         </div>
     </div>
