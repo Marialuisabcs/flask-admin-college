@@ -1,8 +1,8 @@
-from flask_admin import Admin, AdminIndexView
+from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
+from collegeapp.model_view import MyModelView
 from collegeapp.models import *
 from sqlalchemy import event
-
 
 
 admin = Admin(app,
@@ -15,7 +15,7 @@ admin = Admin(app,
 admin.add_view(ModelView(Professor, db.session))
 admin.add_view(ModelView(Curso, db.session))
 admin.add_view(ModelView(Aluno, db.session))
-admin.add_view(ModelView(Materia, db.session))
+admin.add_view(MyModelView(Materia, db.session))
 admin.add_view(ModelView(MatriculadoEm, db.session))
 admin.add_view(ModelView(LecionadaPor, db.session))
 

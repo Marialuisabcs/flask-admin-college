@@ -10,7 +10,7 @@ class Aluno(db.Model):
     nome = db.Column(db.String(255), nullable=False)
     rga = db.Column(db.String(12), nullable=False, unique=True)
     email = db.Column(db.String(30), nullable=False, unique=True)
-    curso_id = db.Column(db.Integer, db.ForeignKey('curso.id_curso', ondelete='CASCADE'))
+    curso_id = db.Column(db.Integer, db.ForeignKey('curso.id_curso'))
     curso = db.relationship("Curso")
 
     def __repr__(self):
@@ -22,7 +22,7 @@ class Curso(db.Model):
     id_curso = db.Column(db.Integer, primary_key=True, autoincrement=True)
     nome = db.Column(db.String(255), nullable=False, unique=True)
     faculdade = db.Column(db.String(20), nullable=False)
-    coordenador_id = db.Column(db.Integer, db.ForeignKey('professor.id_professor', ondelete='CASCADE'))
+    coordenador_id = db.Column(db.Integer, db.ForeignKey('professor.id_professor'))
     coordenador = db.relationship("Professor")
 
     def __repr__(self):
@@ -52,16 +52,16 @@ class Materia(db.Model):
 
 class MatriculadoEm(db.Model):
     __tablename__ = 'matriculadoEm'
-    materia_id = db.Column(db.ForeignKey('materia.id_materia', ondelete='CASCADE'), primary_key=True)
-    aluno_id = db.Column(db.ForeignKey('aluno.id_aluno', ondelete='CASCADE'), primary_key=True)
+    materia_id = db.Column(db.ForeignKey('materia.id_materia'), primary_key=True)
+    aluno_id = db.Column(db.ForeignKey('aluno.id_aluno'), primary_key=True)
     aluno = db.relationship("Aluno")
     materia = db.relationship("Materia")
 
 
 class LecionadaPor(db.Model):
     __tablename__ = 'lecionadaPor'
-    materia_id = db.Column(db.ForeignKey('materia.id_materia', ondelete='CASCADE'), primary_key=True)
-    professor_id = db.Column(db.ForeignKey('professor.id_professor', ondelete='CASCADE'), primary_key=True)
+    materia_id = db.Column(db.ForeignKey('materia.id_materia'), primary_key=True)
+    professor_id = db.Column(db.ForeignKey('professor.id_professor'), primary_key=True)
     professor = db.relationship("Professor")
     materia = db.relationship("Materia")
 
