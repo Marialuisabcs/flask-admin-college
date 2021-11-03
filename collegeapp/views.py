@@ -1,9 +1,7 @@
 from flask_admin import Admin
-from flask_admin.contrib.sqla import ModelView
-from collegeapp.model_view import MyModelView
-from collegeapp.models import *
-from sqlalchemy import event
 
+from collegeapp.model_view import MyModelView, CantCrud
+from collegeapp.models import *
 
 admin = Admin(app,
               name='Trabalho de LBD',
@@ -11,15 +9,10 @@ admin = Admin(app,
               url='/'
               )
 
-
-admin.add_view(ModelView(Professor, db.session))
-admin.add_view(ModelView(Curso, db.session))
-admin.add_view(ModelView(Aluno, db.session))
+admin.add_view(MyModelView(Professor, db.session))
+admin.add_view(MyModelView(Curso, db.session))
+admin.add_view(MyModelView(Aluno, db.session))
 admin.add_view(MyModelView(Materia, db.session))
-admin.add_view(ModelView(MatriculadoEm, db.session))
-admin.add_view(ModelView(LecionadaPor, db.session))
-
-with app.app_context():
-    event.listen(db.engine, 'connect', lambda con, rec: con.execute('pragma foreign_keys=ON'))
-
-
+admin.add_view(MyModelView(MatriculadoEm, db.session))
+admin.add_view(MyModelView(LecionadaPor, db.session))
+admin.add_view(CantCrud(Log, db.session))

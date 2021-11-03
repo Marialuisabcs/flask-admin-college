@@ -65,3 +65,9 @@ class LecionadaPor(db.Model):
     professor = db.relationship("Professor")
     materia = db.relationship("Materia")
 
+
+class Log(db.Model):
+    __tablename__ = 'log'
+    id_log = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    data = db.Column(db.DATE, nullable=False)
+    operacao = db.Column(db.String(1), nullable=False)
