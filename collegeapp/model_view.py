@@ -13,7 +13,7 @@ class MyModelView(ModelView):
             self.session.commit()
 
         except IntegrityError:
-            flash(f'Você não pode deletar esse(a) {self.name}', 'error')
+            flash(f'IntegrityError: Você não pode deletar esse(a) {self.name}', 'error')
             self.session.rollback()
 
             return False
@@ -34,4 +34,3 @@ class MyModelView(ModelView):
 class CantCrud(ModelView):
     can_edit = False
     can_create = False
-    can_delete = False
