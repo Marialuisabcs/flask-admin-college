@@ -1,23 +1,20 @@
 CREATE OR REPLACE FUNCTION alteracaolog() RETURNS TRIGGER AS $$
-DECLARE
-operacao char = CASE
-                 WHEN TG_OP = 'UPDATE' THEN 'U'
-                 WHEN TG_OP = 'DELETE' THEN 'D'
-                 END;
+    DECLARE
+        op char = CASE
+                         WHEN TG_OP = 'UPDATE' THEN 'U'
+                         WHEN TG_OP = 'DELETE' THEN 'D'
+                         END;
 
-BEGIN
-    INSERT INTO log (tabela_alterada, nome, data_alteracao, operacao) VALUES(TG_RELNAME,
-                                                                              old.nome,
-                                                                              CURRENT_DATE,
-                                                                              operacao);
-    RETURN NULL;
+    BEGIN
+        INSERT INTO log (tabela_alterada, nome, data_alteracao, operacao) VALUES(TG_RELNAME, old.nome, CURRENT_DATE, op);
+        RETURN NULL;
 END;
 $$ LANGUAGE PLPGSQL;
 
-DROP TRIGGER IF EXISTS alunolog ON aluno;
-DROP TRIGGER IF EXISTS cursolog ON curso;
-DROP TRIGGER IF EXISTS professorlog ON professor;
-DROP TRIGGER IF EXISTS materialog ON materia;
+DROP TRIGGER alunolog ON aluno;
+DROP TRIGGER cursolog ON curso;
+DROP TRIGGER professorlog ON professor;
+DROP TRIGGER materialog ON materia;
 
 CREATE TRIGGER alunolog
 	AFTER UPDATE OR DELETE ON aluno FOR EACH ROW
