@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION alteracaolog() RETURNS TRIGGER AS $$
+CREATE FUNCTION alteracaolog() RETURNS TRIGGER AS $$
     DECLARE
         op char = CASE
                          WHEN TG_OP = 'UPDATE' THEN 'U'
@@ -10,11 +10,6 @@ CREATE OR REPLACE FUNCTION alteracaolog() RETURNS TRIGGER AS $$
         RETURN NULL;
 END;
 $$ LANGUAGE PLPGSQL;
-
-DROP TRIGGER alunolog ON aluno;
-DROP TRIGGER cursolog ON curso;
-DROP TRIGGER professorlog ON professor;
-DROP TRIGGER materialog ON materia;
 
 CREATE TRIGGER alunolog
 	AFTER UPDATE OR DELETE ON aluno FOR EACH ROW
