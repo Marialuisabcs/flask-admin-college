@@ -1,4 +1,4 @@
-CREATE FUNCTION alteracaolog() RETURNS TRIGGER AS $$
+CREATE OR REPLACE FUNCTION alteracaolog() RETURNS TRIGGER AS $$
     DECLARE
         op char = CASE
                          WHEN TG_OP = 'UPDATE' THEN 'U'
