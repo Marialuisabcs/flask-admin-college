@@ -1,6 +1,8 @@
 from collegeapp import app
 from flask_sqlalchemy import SQLAlchemy
+from flask_babelex import Babel
 
+babel = Babel(app)
 db = SQLAlchemy(app)
 
 
@@ -31,6 +33,7 @@ class Curso(db.Model):
 
 class Professor(db.Model):
     __tablename__ = 'professor'
+
     id_professor = db.Column(db.Integer, primary_key=True, autoincrement=True)
     nome = db.Column(db.String(255), nullable=False)
     email = db.Column(db.String(30), nullable=False, unique=True)
@@ -43,7 +46,7 @@ class Professor(db.Model):
 class Materia(db.Model):
     __tablename__ = 'materia'
     id_materia = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    nome = db.Column(db.String(255), nullable=True)
+    nome = db.Column(db.String(255), nullable=False)
     carga_horaria = db.Column(db.Integer, nullable=False)
 
     def __repr__(self):
@@ -69,5 +72,7 @@ class LecionadaPor(db.Model):
 class Log(db.Model):
     __tablename__ = 'log'
     id_log = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    data = db.Column(db.DATE, nullable=False)
+    tabela_alterada = db.Column(db.String(255), nullable=False)
+    nome = db.Column(db.String(255), nullable=False)
+    data_alteracao = db.Column(db.DATE, nullable=False)
     operacao = db.Column(db.String(1), nullable=False)
