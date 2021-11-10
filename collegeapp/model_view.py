@@ -1,9 +1,6 @@
-from psycopg2 import errors
 from flask import flash
 from flask_admin.contrib.sqla import ModelView
 from sqlalchemy.exc import IntegrityError
-
-UniqueViolation = errors.lookup('23505')
 
 
 class MyModelView(ModelView):
@@ -17,12 +14,6 @@ class MyModelView(ModelView):
 
         except IntegrityError:
             flash(f'IntegrityError: Você não pode deletar esse(a) {self.name}', 'error')
-            self.session.rollback()
-
-            return False
-
-        except UniqueViolation:
-            flash(f'UniqueViolation: Você não pode adicionar esse(a) relação', 'error')
             self.session.rollback()
 
             return False
