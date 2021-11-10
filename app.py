@@ -1,7 +1,6 @@
 from collegeapp.models import *
 from sqlalchemy import text
 
-db.drop_all()
 db.create_all()
 db.session.commit()
 
