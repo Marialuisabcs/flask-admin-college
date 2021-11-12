@@ -1,1 +1,1 @@
-drop table if existis al;
+drop table if exists al;
