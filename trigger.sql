@@ -1,3 +1,8 @@
+DROP TRIGGER IF EXISTS alunolog ON aluno;
+DROP TRIGGER IF EXISTS cursolog ON curso;
+DROP TRIGGER IF EXISTS professorlog ON professor;
+DROP TRIGGER IF EXISTS materialog ON materia;
+
 CREATE OR REPLACE FUNCTION alteracaolog() RETURNS TRIGGER AS $$
     DECLARE
         op char = CASE
@@ -10,11 +15,6 @@ CREATE OR REPLACE FUNCTION alteracaolog() RETURNS TRIGGER AS $$
         RETURN NULL;
 END;
 $$ LANGUAGE PLPGSQL;
-
-DROP TRIGGER IF EXISTS alunolog ON aluno;
-DROP TRIGGER IF EXISTS cursolog ON curso;
-DROP TRIGGER IF EXISTS professorlog ON professor;
-DROP TRIGGER IF EXISTS materialog ON materia;
 
 CREATE TRIGGER alunolog
 	AFTER UPDATE OR DELETE ON aluno FOR EACH ROW
